@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Atlas géographique de l’Algérie</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+<style>
+  :root {
+    --ink: #1a241e;
+    --muted: #5c6b62;
+    --line: #d7d0c4;
+    --paper: #f6f1e8;
+    --panel: rgba(246, 241, 232, 0.94);
+    --green: #1d4a3a;
+    --water: #1f6f86;
+    --sand: #c4a36a;
+    --terra: #b85a2a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #8fb7b4; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+  }
+  html[dir="rtl"] body { font-family: "Segoe UI", "Noto Naskh Arabic", Arial, sans-serif; }
+  #map { position: absolute; inset: 0; }
+  .maplibregl-ctrl-bottom-right, .maplibregl-ctrl-bottom-left { display: none; }
+  .topbar, .sidebar, .inspector, .statusbar, .results {
+    position: absolute;
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(26, 36, 30, 0.08);
+    border: 1px solid rgba(255,255,255,0.55);
+  }
+  .sidebar {
+    top: 16px; left: 16px;
+    width: 280px;
+    max-height: calc(100% - 70px);
+    border-radius: 18px;
+    padding: 18px 16px 14px;
+    overflow: auto;
+    z-index: 2;
+  }
+  html[dir="rtl"] .sidebar { left: auto; right: 16px; }
+  .sidebar h1 {
+    margin: 0 0 4px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .group { margin-top: 14px; }
+  .group h2 {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+  }
+  .layer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .layer.on { background: rgba(42, 107, 82, 0.08); }
+  .layer.err { background: rgba(184, 90, 42, 0.08); }
+  .box {
+    width: 16px; height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid #8a9388;
+    background: white;
+    position: relative;
+    flex: 0 0 16px;
+  }
+  .layer.on .box { background: var(--green); border-color: var(--green); }
+  .layer.on .box::after {
+    content: "";
+    position: absolute;
+    left: 4px; top: 1px;
+    width: 5px; height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .swatch { width: 10px; height: 10px; border-radius: 99px; margin-inline-start: auto; flex: 0 0 10px; }
+  .layer-msg {
+    display: none;
+    margin: 0 8px 6px 34px;
+    font-size: 11.5px;
+    color: var(--terra);
+    line-height: 1.35;
+  }
+  .layer.err + .layer-msg, .layer-msg.show { display: block; }
+  .hint { margin: 12px 8px 0; font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .topbar {
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, calc(100% - 640px));
+    min-width: 280px;
+    height: 52px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px 0 18px;
+    z-index: 3;
+  }
+  .search {
+    flex: 1;
+    height: 40px;
+    border: 1px solid var(--line);
+    background: #fffdf8;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    gap: 8px;
+  }
+  .search span { color: #9aa59c; }
+  .search input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    min-width: 0;
+  }
+  .results {
+    top: 74px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(520px, calc(100% - 640px));
+    min-width: 260px;
+    max-height: 280px;
+    overflow: auto;
+    border-radius: 14px;
+    padding: 6px;
+    display: none;
+    z-index: 4;
+  }
+  .results.show { display: block; }
+  .results button {
+    display: block;
+    width: 100%;
+    text-align: start;
+    border: 0;
+    background: transparent;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font: inherit;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .results button:hover { background: rgba(42, 107, 82, 0.08); }
+  .results small { color: var(--muted); margin-inline-start: 6px; }
+  .lang { display: flex; background: #ece6da; border-radius: 999px; padding: 3px; gap: 2px; }
+  .lang button {
+    font: inherit;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .lang button.on { background: var(--green); color: white; }
+  .inspector {
+    top: 16px; right: 16px;
+    width: 324px;
+    max-height: calc(100% - 70px);
+    overflow: auto;
+    border-radius: 18px;
+    padding: 20px 18px;
+    display: none;
+    z-index: 2;
+  }
+  html[dir="rtl"] .inspector { right: auto; left: 16px; }
+  .inspector.show { display: block; }
+  .kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--water); font-weight: 700; }
+  .inspector h1 { margin: 6px 0 8px; font-size: 26px; letter-spacing: -0.03em; line-height: 1.15; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip { font-size: 11px; padding: 5px 8px; border-radius: 999px; background: #ece6da; }
+  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 16px; }
+  .meta div { background: #fffdf8; border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .meta small { display: block; color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .meta b { font-size: 16px; }
+  .note { font-size: 13.5px; line-height: 1.45; color: #314038; margin: 0 0 16px; }
+  .src { font-size: 12px; color: var(--muted); line-height: 1.45; margin: 0; }
+  .btn {
+    display: block; width: 100%; margin-top: 16px;
+    background: var(--green); color: white; border: 0;
+    border-radius: 12px; height: 42px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
+  .statusbar {
+    left: 50%; transform: translateX(-50%);
+    width: min(520px, calc(100% - 640px));
+    min-width: 280px;
+    bottom: 16px; height: 30px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px; font-size: 11px; color: var(--muted); z-index: 2;
+  }
+  @media (max-width: 1100px) {
+    .topbar, .results, .statusbar { width: calc(100% - 40px); min-width: 0; }
+    .sidebar { max-height: 42%; }
+    .inspector { top: auto; bottom: 56px; max-height: 40%; }
+  }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<aside class="sidebar">
+  <h1 data-i18n="layers">Couches</h1>
+  <div class="group">
+    <h2 data-i18n="base">Fond de carte</h2>
+    <div class="layer on" data-layer="relief"><i class="box"></i><span data-i18n="relief">Relief ombré</span><span class="swatch" style="background:#8aa07a"></span></div>
+    <div class="layer" data-layer="ortho"><i class="box"></i><span data-i18n="ortho">Orthophoto</span><span class="swatch" style="background:#7a7266"></span></div>
+    <div class="layer" data-layer="inct"><i class="box"></i><span data-i18n="inct">Carte topographique INCT</span><span class="swatch" style="background:#d8c8a0"></span></div>
+    <p class="layer-msg" id="msg-inct"></p>
+  </div>
+  <div class="group">
+    <h2 data-i18n="topo">Topographie</h2>
+    <div class="layer on" data-layer="mnt"><i class="box"></i><span data-i18n="mnt">Modèle numérique de terrain</span><span class="swatch" style="background:#c4a36a"></span></div>
+    <div class="layer" data-layer="contours"><i class="box"></i><span data-i18n="contours">Courbes de niveau</span><span class="swatch" style="background:#6b5a3a"></span></div>
+    <p class="layer-msg" id="msg-contours"></p>
+    <div class="layer" data-layer="slope"><i class="box"></i><span data-i18n="slope">Pente</span><span class="swatch" style="background:#b85a2a"></span></div>
+    <p class="layer-msg" id="msg-slope"></p>
+  </div>
+  <div class="group">
+    <h2 data-i18n="hydro">Hydrographie</h2>
+    <div class="layer on" data-layer="rivers"><i class="box"></i><span data-i18n="rivers">Cours d’eau et oueds</span><span class="swatch" style="background:#1f6f86"></span></div>
+    <div class="layer on" data-layer="waters"><i class="box"></i><span data-i18n="waters">Lacs, chotts et sebkhas</span><span class="swatch" style="background:#4aa3b5"></span></div>
+    <div class="layer" data-layer="dams"><i class="box"></i><span data-i18n="dams">Barrages</span><span class="swatch" style="background:#2b4f8c"></span></div>
+    <div class="layer" data-layer="nappes"><i class="box"></i><span data-i18n="nappes">Nappes phréatiques</span><span class="swatch" style="background:#3d7ea6"></span></div>
+    <p class="layer-msg" id="msg-nappes"></p>
+    <div class="layer" data-layer="basins"><i class="box"></i><span data-i18n="basins">Bassins versants</span><span class="swatch" style="background:#7eb3c4"></span></div>
+    <p class="layer-msg" id="msg-basins"></p>
+  </div>
+  <div class="group">
+    <h2 data-i18n="limits">Limites et références</h2>
+    <div class="layer on" data-layer="wilayas"><i class="box"></i><span data-i18n="wilayas">Wilayas</span><span class="swatch" style="background:#1d4a3a"></span></div>
+    <div class="layer" data-layer="dairas"><i class="box"></i><span data-i18n="dairas">Dairas et communes</span><span class="swatch" style="background:#7a8a7e"></span></div>
+    <p class="layer-msg" id="msg-dairas"></p>
+    <div class="layer" data-layer="geology"><i class="box"></i><span data-i18n="geology">Géologie (ASGA / BNDG)</span><span class="swatch" style="background:#9a6b3a"></span></div>
+    <p class="layer-msg" id="msg-geology"></p>
+    <div class="layer on" data-layer="places"><i class="box"></i><span data-i18n="places">Toponymie</span><span class="swatch" style="background:#3d4a44"></span></div>
+  </div>
+  <p class="hint" data-i18n="hint">Cliquer un sommet, un oued ou un barrage pour l’inspecter.</p>
+</aside>
+
+<header class="topbar">
+  <div class="search">
+    <span>⌕</span>
+    <input id="search" type="search" autocomplete="off" data-i18n-placeholder="search" placeholder="Rechercher un lieu, un oued, une wilaya" />
+  </div>
+  <div class="lang">
+    <button type="button" class="on" data-lang="fr">FR</button>
+    <button type="button" data-lang="ar">عر</button>
+  </div>
+</header>
+<div class="results" id="results"></div>
+
+<aside class="inspector" id="inspector"></aside>
+
+<footer class="statusbar">
+  <span id="coords">28,00° N · 3,00° E</span>
+  <span data-i18n="statusMid">58 wilayas · 2 381 741 km²</span>
+  <span id="scale">Échelle 1 : 8 000 000</span>
+</footer>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="atlas-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

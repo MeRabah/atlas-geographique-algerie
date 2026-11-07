@@ -15,16 +15,37 @@
       rivers: "Cours d’eau et oueds",
       waters: "Lacs, chotts et sebkhas",
       dams: "Barrages",
-      nappes: "Nappes phréatiques",
+      nappes: "Aquifères",
       basins: "Bassins versants",
       limits: "Limites et références",
-      wilayas: "Wilayas",
+      wilayas: "Wilayas d’Algérie",
       dairas: "Dairas et communes",
       geology: "Géologie (ASGA / BNDG)",
       places: "Toponymie",
-      hint: "Cliquer un sommet, un oued ou un barrage pour l’inspecter.",
-      search: "Rechercher un lieu, un oued, une wilaya",
-      statusMid: "58 wilayas · 2 381 741 km²",
+      countries: "Pays du Maghreb",
+      provinces: "Provinces et régions",
+      adm2: "Découpage de second niveau",
+      regions: "Régions physiques",
+      major: "Grands fleuves",
+      lakes: "Grands plans d’eau",
+      peaks: "Sommets",
+      airports: "Aéroports",
+      ports: "Ports",
+      roads: "Routes principales",
+      rail: "Chemins de fer",
+      parks: "Parcs nationaux",
+      bgs: "Géologie de surface",
+      country: "Pays",
+      population: "Population",
+      lithology: "Lithologie",
+      place: "Lieu",
+      territory: "Territoire",
+      region: "Région",
+      aquifer: "Aquifère",
+      road: "Route",
+      hint: "Cliquer un lieu, un oued, un sommet ou une limite pour l’inspecter.",
+      search: "Rechercher dans le Maghreb",
+      statusMid: "Maghreb · six pays et territoires",
       scale: "Échelle",
       type: "Type",
       wilaya: "Wilaya",
@@ -39,11 +60,11 @@
       admin: "Limite administrative",
       basinBtn: "Voir le bassin versant",
       noBasin: "Les bassins versants ne sont pas encore chargés.",
-      src: "Données ouvertes pour le prototype (SRTM / tuiles de terrain, cours d’eau OSM, limites administratives). INCT et ANRH restent les références nationales.",
+      src: "Données ouvertes (tuiles SRTM, OpenStreetMap, Natural Earth, geoBoundaries, Africa Groundwater Atlas du BGS). INCT et ANRH restent les références nationales algériennes.",
       errInct: "La carte topographique INCT est commercialisée et n’est pas librement téléchargeable. Licence requise — impossible de charger cette couche.",
       errGeneric: "Impossible de charger cette couche.",
       errNappes: "Aucun jeu ouvert de nappes phréatiques n’est encore branché.",
-      errBasins: "Les bassins versants ne sont pas encore branchés.",
+      errBasins: "Aucun bassin versant redistribuable n’est branché. HydroBASINS ne peut pas être republié sous sa licence.",
       errContours: "Les courbes de niveau ne sont pas encore branchées.",
       errSlope: "La couche de pente n’est pas encore branchée.",
       errDairas: "Les contours des dairas et communes ne sont pas encore branchés.",
@@ -71,9 +92,30 @@
       dairas: "الدوائر والبلديات",
       geology: "الجيولوجيا (ASGA / BNDG)",
       places: "الأسماء الجغرافية",
-      hint: "انقر على قمة أو وادٍ أو سد لعرض التفاصيل.",
-      search: "ابحث عن مكان أو وادٍ أو ولاية",
-      statusMid: "58 ولاية · 2 381 741 كم²",
+      countries: "بلدان المغرب الكبير",
+      provinces: "الولايات والأقاليم",
+      adm2: "التقسيم الإداري الثاني",
+      regions: "المناطق الطبيعية",
+      major: "الأنهار الكبرى",
+      lakes: "المسطحات المائية الكبرى",
+      peaks: "القمم",
+      airports: "المطارات",
+      ports: "الموانئ",
+      roads: "الطرق الرئيسية",
+      rail: "السكك الحديدية",
+      parks: "الحدائق الوطنية",
+      bgs: "الجيولوجيا السطحية",
+      country: "البلد",
+      population: "السكان",
+      lithology: "الليثولوجيا",
+      place: "مكان",
+      territory: "إقليم",
+      region: "منطقة",
+      aquifer: "طبقة مائية",
+      road: "طريق",
+      hint: "انقر على مكان أو وادٍ أو قمة أو حد لعرض التفاصيل.",
+      search: "ابحث في المغرب الكبير",
+      statusMid: "المغرب الكبير · ستة بلدان وأقاليم",
       scale: "المقياس",
       type: "النوع",
       wilaya: "الولاية",
@@ -92,12 +134,82 @@
       errInct: "الخريطة الطبوغرافية INCT غير متاحة للتنزيل الحر وتتطلب ترخيصاً.",
       errGeneric: "تعذّر تحميل هذه الطبقة.",
       errNappes: "لم تُربط بعد طبقة مفتوحة للمياه الجوفية.",
-      errBasins: "لم تُربط بعد طبقة الأحواض المائية.",
+      errBasins: "لا توجد طبقة أحواض قابلة لإعادة النشر. ترخيص HydroBASINS لا يسمح بإعادة نشر البيانات.",
       errContours: "لم تُربط بعد منحنيات التسوية.",
       errSlope: "لم تُربط بعد طبقة الانحدار.",
       errDairas: "لم تُربط بعد حدود الدوائر والبلديات.",
-      errGeology: "بيانات الجيولوجيا ASGA / BNDG تتطلب ترخيصاً.",
+      errGeology: "بيانات الجيولوجيا ASGA / BNDG تتطلب ترخيصاً. طبقة الجيولوجيا السطحية المفتوحة هي خريطة BGS.",
       retry: "إعادة المحاولة",
+    },
+    en: {
+      layers: "Layers",
+      base: "Basemap",
+      relief: "Shaded relief",
+      ortho: "Imagery",
+      inct: "INCT topographic map",
+      topo: "Topography",
+      mnt: "Terrain model",
+      contours: "Contours",
+      slope: "Slope",
+      hydro: "Hydrography",
+      rivers: "Rivers and wadis",
+      waters: "Lakes, chotts and sebkhas",
+      dams: "Dams",
+      nappes: "Aquifers",
+      basins: "Drainage basins",
+      limits: "Boundaries and reference",
+      wilayas: "Algerian wilayas",
+      dairas: "Second-level divisions",
+      geology: "Geology (ASGA / BNDG)",
+      places: "Place names",
+      countries: "Maghreb countries",
+      provinces: "Provinces and regions",
+      adm2: "Second-level divisions",
+      regions: "Physical regions",
+      major: "Major rivers",
+      lakes: "Large water bodies",
+      peaks: "Summits",
+      airports: "Airports",
+      ports: "Ports",
+      roads: "Main roads",
+      rail: "Railways",
+      parks: "National parks",
+      bgs: "Surface geology",
+      country: "Country",
+      population: "Population",
+      lithology: "Lithology",
+      place: "Place",
+      territory: "Territory",
+      region: "Region",
+      aquifer: "Aquifer",
+      road: "Road",
+      hint: "Click a place, river, summit, or boundary to inspect it.",
+      search: "Search the Maghreb",
+      statusMid: "Maghreb · six countries and territories",
+      scale: "Scale",
+      type: "Type",
+      wilaya: "Wilaya",
+      length: "Length",
+      outlet: "Outlet",
+      near: "Near",
+      elevation: "Elevation",
+      river: "River",
+      water: "Water body",
+      dam: "Dam",
+      peak: "Summit",
+      admin: "Administrative area",
+      basinBtn: "Show the drainage basin",
+      noBasin: "Drainage basins are not loaded.",
+      src: "Open data for this atlas (SRTM terrain tiles, OpenStreetMap, Natural Earth, geoBoundaries, BGS Africa Groundwater Atlas). INCT and ANRH remain the Algerian national references.",
+      errInct: "The INCT topographic map is sold commercially and cannot be downloaded freely.",
+      errGeneric: "This layer could not be loaded.",
+      errNappes: "No open aquifer layer is connected.",
+      errBasins: "No redistributable basin dataset is connected. HydroBASINS cannot be republished under its licence.",
+      errContours: "Contour lines are not connected. A full Maghreb contour extract is too large for this atlas.",
+      errSlope: "No open slope tiles are connected.",
+      errDairas: "Second-level divisions are not connected.",
+      errGeology: "The ASGA / BNDG geological map needs a licence. The open surface-geology layer is the BGS map.",
+      retry: "Try again",
     },
   };
 
@@ -105,8 +217,8 @@
     chelif: {
       match: /chelif|chélif|cheliff|chlef|chleff|وادي الشلف|واد الشلف|الشلف/i,
       kickerKey: "river",
-      title: { fr: "Oued Chelif", ar: "وادي الشلف" },
-      chips: { fr: ["Hydrographie", "Tell", "Méditerranée"], ar: ["هيدروغرافيا", "التل", "البحر الأبيض المتوسط"] },
+      title: { fr: "Oued Chelif", ar: "وادي الشلف", en: "Chelif River" },
+      chips: { fr: ["Hydrographie", "Tell", "Méditerranée"], ar: ["هيدروغرافيا", "التل", "البحر الأبيض المتوسط"], en: ["Hydrography", "Tell", "Mediterranean"] },
       meta: {
         fr: [
           ["Type", "Oued"],
@@ -120,17 +232,24 @@
           ["المصب", "البحر الأبيض المتوسط"],
           ["بالقرب من", "مستغانم"],
         ],
+        en: [
+          ["Type", "Wadi"],
+          ["Length", "725 km"],
+          ["Outlet", "Mediterranean"],
+          ["Near", "Mostaganem"],
+        ],
       },
       note: {
         fr: "Plus long cours d’eau d’Algérie. Il traverse le Tell et se jette dans la Méditerranée près de Mostaganem (certaines sources indiquent 733 km).",
         ar: "أطول مجرى مائي في الجزائر. يعبر التل ويصب في البحر الأبيض المتوسط قرب مستغانم.",
+        en: "Longest river in Algeria. It crosses the Tell and reaches the Mediterranean near Mostaganem (some sources say 733 km).",
       },
     },
     tahat: {
       match: /tahat|تاهات/i,
       kickerKey: "peak",
-      title: { fr: "Mont Tahat", ar: "جبل تاهات" },
-      chips: { fr: ["Topographie", "Hoggar"], ar: ["تضاريس", "الهقار"] },
+      title: { fr: "Mont Tahat", ar: "جبل تاهات", en: "Mount Tahat" },
+      chips: { fr: ["Topographie", "Hoggar"], ar: ["تضاريس", "الهقار"], en: ["Topography", "Hoggar"] },
       meta: {
         fr: [
           ["Type", "Sommet"],
@@ -140,10 +259,31 @@
           ["النوع", "قمة"],
           ["السلسلة", "الهقار"],
         ],
+        en: [
+          ["Type", "Summit"],
+          ["Range", "Hoggar"],
+        ],
       },
       note: {
         fr: "Plus haut sommet d’Algérie, dans le Hoggar. L’altitude publiée diverge selon les sources (environ 2 908 m à 3 003 m), elle n’est donc pas affichée ici comme une valeur unique.",
         ar: "أعلى قمة في الجزائر، في الهقار. تختلف الارتفاعات المنشورة حسب المصادر (حوالي 2908 م إلى 3003 م).",
+        en: "Highest summit in Algeria, in the Hoggar. Published elevations differ by source (about 2,908 m to 3,003 m), so no single figure is shown.",
+      },
+    },
+    toubkal: {
+      match: /toubkal|توبقال/i,
+      kickerKey: "peak",
+      title: { fr: "Jbel Toubkal", ar: "جبل توبقال", en: "Jbel Toubkal" },
+      chips: { fr: ["Topographie", "Haut Atlas"], ar: ["تضاريس", "الأطلس الكبير"], en: ["Topography", "High Atlas"] },
+      meta: {
+        fr: [["Type", "Sommet"], ["Chaîne", "Haut Atlas"], ["Altitude", "4 167 m"]],
+        ar: [["النوع", "قمة"], ["السلسلة", "الأطلس الكبير"], ["الارتفاع", "4167 م"]],
+        en: [["Type", "Summit"], ["Range", "High Atlas"], ["Elevation", "4,167 m"]],
+      },
+      note: {
+        fr: "Plus haut sommet du Maghreb et de l’Afrique du Nord, dans le Haut Atlas marocain.",
+        ar: "أعلى قمة في المغرب الكبير وشمال أفريقيا، في الأطلس الكبير.",
+        en: "Highest summit of the Maghreb and of North Africa, in Morocco’s High Atlas.",
       },
     },
   };
@@ -151,9 +291,20 @@
   let lang = "fr";
   const t = (k) => I18N[lang][k] || k;
 
+  function labelField() {
+    if (lang === "ar") return ["coalesce", ["get", "name_ar"], ["get", "name"]];
+    if (lang === "en") return ["coalesce", ["get", "name_en"], ["get", "name"]];
+    return ["coalesce", ["get", "name_fr"], ["get", "name"]];
+  }
+
   function applyI18n() {
-    document.documentElement.lang = lang === "ar" ? "ar" : "fr";
+    document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.title = lang === "en"
+      ? "Geographic Atlas of the Maghreb"
+      : lang === "ar"
+        ? "الأطلس الجغرافي للمغرب الكبير"
+        : "Atlas géographique du Maghreb";
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       el.textContent = t(el.getAttribute("data-i18n"));
     });
@@ -165,21 +316,16 @@
     });
     updateScale();
     if (selected) showInspector(selected);
-    if (map.getLayer("place-labels")) {
-      map.setLayoutProperty("place-labels", "text-field", ["coalesce", lang === "ar" ? ["get", "name_ar"] : ["get", "name"], ["get", "name"]]);
-    }
-    if (map.getLayer("peak-labels")) {
-      map.setLayoutProperty("peak-labels", "text-field", ["coalesce", lang === "ar" ? ["get", "name_ar"] : ["get", "name"], ["get", "name"]]);
-    }
+    ["place-labels", "peak-labels"].forEach((id) => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, "text-field", labelField());
+    });
   }
 
   const UNAVAILABLE = {
     inct: "errInct",
     contours: "errContours",
     slope: "errSlope",
-    nappes: "errNappes",
     basins: "errBasins",
-    dairas: "errDairas",
     geology: "errGeology",
   };
 
@@ -189,11 +335,47 @@
     ortho: false,
     inct: false,
     mnt: true,
+    peaks: true,
+    regions: false,
     rivers: true,
+    major: true,
     waters: true,
+    lakes: false,
     dams: false,
+    nappes: false,
+    countries: true,
     wilayas: true,
+    provinces: true,
+    adm2: false,
+    bgs: false,
     places: true,
+    parks: false,
+    roads: false,
+    rail: false,
+    airports: false,
+    ports: false,
+  };
+
+  const LAYER_IDS = {
+    rivers: ["rivers-line"],
+    major: ["rivers-major-line"],
+    waters: ["waters-fill", "waters-line"],
+    lakes: ["lakes-fill", "lakes-line"],
+    dams: ["dams-circle"],
+    wilayas: ["wilayas-fill", "wilayas-line"],
+    places: ["places-circle", "place-labels"],
+    peaks: ["peaks-circle", "peak-labels"],
+    countries: ["countries-line", "countries-esh"],
+    provinces: ["provinces-fill", "provinces-line"],
+    adm2: ["adm2-fill", "adm2-line"],
+    regions: ["regions-fill", "regions-line"],
+    nappes: ["aquifers-fill", "aquifers-line"],
+    bgs: ["geology-fill", "geology-line"],
+    airports: ["airports-circle"],
+    ports: ["ports-circle"],
+    roads: ["roads-line"],
+    rail: ["rail-line"],
+    parks: ["parks-circle"],
   };
 
   const style = {
@@ -238,80 +420,133 @@
   const map = new maplibregl.Map({
     container: "map",
     style,
-    center: [3, 28],
-    zoom: 4.7,
-    minZoom: 4,
+    center: [3, 27],
+    zoom: 3.9,
+    minZoom: 3.3,
     maxZoom: 14,
-    maxBounds: [[-12, 16], [16, 40]],
+    maxBounds: [[-19, 13.2], [27, 39]],
     attributionControl: false,
   });
 
   let selected = null;
 
+  function fc(key) {
+    const data = DATA[key];
+    return data && data.type ? data : { type: "FeatureCollection", features: [] };
+  }
+
+  function shown(key) {
+    return state[key] ? "visible" : "none";
+  }
+
+  function addFill(id, source, color, opacity, key) {
+    map.addLayer({
+      id,
+      type: "fill",
+      source,
+      layout: { visibility: shown(key) },
+      paint: { "fill-color": color, "fill-opacity": opacity },
+    });
+  }
+
+  function addLine(id, source, color, width, key) {
+    map.addLayer({
+      id,
+      type: "line",
+      source,
+      layout: { visibility: shown(key) },
+      paint: { "line-color": color, "line-width": width, "line-opacity": 0.9 },
+    });
+  }
+
+  function addDot(id, source, color, radius, key) {
+    map.addLayer({
+      id,
+      type: "circle",
+      source,
+      layout: { visibility: shown(key) },
+      paint: {
+        "circle-radius": radius,
+        "circle-color": color,
+        "circle-stroke-color": "#f6f1e8",
+        "circle-stroke-width": 1.15,
+      },
+    });
+  }
+
   function addDataLayers() {
-    map.addSource("wilayas", { type: "geojson", data: DATA.wilayas });
-    map.addSource("rivers", { type: "geojson", data: DATA.rivers });
-    map.addSource("waters", { type: "geojson", data: DATA.waters });
-    map.addSource("dams", { type: "geojson", data: DATA.dams });
-    map.addSource("peaks", { type: "geojson", data: DATA.peaks });
-    map.addSource("places", { type: "geojson", data: DATA.places });
+    ["wilayas", "rivers", "waters", "dams", "peaks", "places", "countries", "provinces", "adm2", "regions", "rivers_major", "lakes", "roads", "rail", "airports", "ports", "aquifers", "geology_bgs", "parks"].forEach((key) => {
+      map.addSource(key, { type: "geojson", data: fc(key) });
+    });
     map.addSource("highlight", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
 
     map.addLayer({
-      id: "wilayas-fill",
+      id: "geology-fill",
       type: "fill",
-      source: "wilayas",
-      paint: { "fill-color": "#1d4a3a", "fill-opacity": 0.04 },
+      source: "geology_bgs",
+      layout: { visibility: shown("bgs") },
+      paint: {
+        "fill-color": ["match", ["get", "era"], "cenozoic", "#e6d3a1", "mesozoic", "#8fb7b4", "paleozoic", "#c4a36a", "precambrian", "#b85a2a", "igneous", "#8d6b8a", "#d7d0c4"],
+        "fill-opacity": 0.55,
+      },
     });
+    addLine("geology-line", "geology_bgs", "#8a7a62", 0.4, "bgs");
     map.addLayer({
-      id: "wilayas-line",
-      type: "line",
-      source: "wilayas",
-      paint: { "line-color": "#1d4a3a", "line-width": 1, "line-opacity": 0.65 },
-    });
-    map.addLayer({
-      id: "waters-fill",
+      id: "aquifers-fill",
       type: "fill",
-      source: "waters",
-      paint: { "fill-color": "#4aa3b5", "fill-opacity": 0.45 },
+      source: "aquifers",
+      layout: { visibility: shown("nappes") },
+      paint: {
+        "fill-color": ["match", ["get", "prod"], "H", "#1f6f86", "M", "#4aa3b5", "L", "#c4a36a", "V", "#7a8a7e", "#b7c9ce"],
+        "fill-opacity": 0.45,
+      },
     });
+    addLine("aquifers-line", "aquifers", "#1f6f86", 0.35, "nappes");
+    addFill("regions-fill", "regions", "#8aa07a", 0.18, "regions");
+    addLine("regions-line", "regions", "#3d4a36", 1, "regions");
+    addFill("provinces-fill", "provinces", "#2a6b52", 0.06, "provinces");
+    addLine("provinces-line", "provinces", "#2a6b52", 1.05, "provinces");
+    addFill("wilayas-fill", "wilayas", "#1d4a3a", 0.05, "wilayas");
+    addLine("wilayas-line", "wilayas", "#1d4a3a", 1, "wilayas");
+    addFill("adm2-fill", "adm2", "#7a8a7e", 0.04, "adm2");
+    addLine("adm2-line", "adm2", "#5c6b62", 0.7, "adm2");
     map.addLayer({
-      id: "waters-line",
+      id: "countries-line",
       type: "line",
-      source: "waters",
-      paint: { "line-color": "#1f6f86", "line-width": 1.2 },
+      source: "countries",
+      filter: ["!=", ["get", "iso_a3"], "ESH"],
+      layout: { visibility: shown("countries") },
+      paint: { "line-color": "#1a241e", "line-width": 1.8 },
     });
     map.addLayer({
-      id: "rivers-line",
+      id: "countries-esh",
       type: "line",
-      source: "rivers",
-      paint: { "line-color": "#1f6f86", "line-width": 1.4, "line-opacity": 0.9 },
+      source: "countries",
+      filter: ["==", ["get", "iso_a3"], "ESH"],
+      layout: { visibility: shown("countries") },
+      paint: { "line-color": "#1a241e", "line-width": 1.6, "line-dasharray": [2, 1.4] },
     });
-    map.addLayer({
-      id: "dams-circle",
-      type: "circle",
-      source: "dams",
-      layout: { visibility: "none" },
-      paint: { "circle-radius": 5, "circle-color": "#2b4f8c", "circle-stroke-color": "#f6f1e8", "circle-stroke-width": 1.2 },
-    });
-    map.addLayer({
-      id: "peaks-circle",
-      type: "circle",
-      source: "peaks",
-      paint: { "circle-radius": 5, "circle-color": "#b85a2a", "circle-stroke-color": "#f6f1e8", "circle-stroke-width": 1.3 },
-    });
-    map.addLayer({
-      id: "places-circle",
-      type: "circle",
-      source: "places",
-      paint: { "circle-radius": 3.2, "circle-color": "#1a241e", "circle-stroke-color": "#f6f1e8", "circle-stroke-width": 1.4 },
-    });
+    addFill("waters-fill", "waters", "#4aa3b5", 0.45, "waters");
+    addLine("waters-line", "waters", "#1f6f86", 1, "waters");
+    addFill("lakes-fill", "lakes", "#164e61", 0.28, "lakes");
+    addLine("lakes-line", "lakes", "#164e61", 1.2, "lakes");
+    addLine("rivers-line", "rivers", "#1f6f86", 1.15, "rivers");
+    addLine("rivers-major-line", "rivers_major", "#164e61", 2.6, "major");
+    addLine("roads-line", "roads", "#5c6b62", 1.15, "roads");
+    addLine("rail-line", "rail", "#6b5a3a", 1.25, "rail");
+    addDot("dams-circle", "dams", "#2b4f8c", 4.5, "dams");
+    addDot("airports-circle", "airports", "#3d4a44", 4, "airports");
+    addDot("ports-circle", "ports", "#1f6f86", 4.5, "ports");
+    addDot("parks-circle", "parks", "#1d4a3a", 5, "parks");
+    addDot("peaks-circle", "peaks", "#b85a2a", 4.4, "peaks");
+    addDot("places-circle", "places", "#1a241e", 3.1, "places");
     map.addLayer({
       id: "place-labels",
       type: "symbol",
       source: "places",
       layout: {
-        "text-field": ["coalesce", ["get", "name"], ["get", "name_ar"]],
+        visibility: shown("places"),
+        "text-field": labelField(),
         "text-size": 12,
         "text-offset": [0.9, 0],
         "text-anchor": "left",
@@ -324,9 +559,10 @@
       type: "symbol",
       source: "peaks",
       layout: {
-        "text-field": ["get", "name"],
+        visibility: shown("peaks"),
+        "text-field": labelField(),
         "text-size": 11,
-        "text-offset": [0, 0.95],
+        "text-offset": [0, 0.9],
         "text-anchor": "top",
         "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
       },
@@ -350,27 +586,36 @@
       type: "circle",
       source: "highlight",
       filter: ["==", ["geometry-type"], "Point"],
-      paint: {
-        "circle-radius": 7,
-        "circle-color": "#1f6f86",
-        "circle-stroke-color": "#f6f1e8",
-        "circle-stroke-width": 2,
-      },
+      paint: { "circle-radius": 7, "circle-color": "#1f6f86", "circle-stroke-color": "#f6f1e8", "circle-stroke-width": 2 },
     });
 
-    const clickable = ["rivers-line", "waters-fill", "dams-circle", "peaks-circle", "wilayas-fill", "places-circle"];
-    clickable.forEach((id) => {
+    const clickable = [
+      ["rivers-line", "river"],
+      ["rivers-major-line", "major"],
+      ["waters-fill", "water"],
+      ["lakes-fill", "lakes"],
+      ["dams-circle", "dam"],
+      ["peaks-circle", "peak"],
+      ["wilayas-fill", "admin"],
+      ["provinces-fill", "provinces"],
+      ["adm2-fill", "adm2"],
+      ["countries-line", "countries"],
+      ["countries-esh", "territory"],
+      ["places-circle", "place"],
+      ["regions-fill", "regions"],
+      ["aquifers-fill", "nappes"],
+      ["geology-fill", "bgs"],
+      ["roads-line", "roads"],
+      ["rail-line", "rail"],
+      ["airports-circle", "airports"],
+      ["ports-circle", "ports"],
+      ["parks-circle", "parks"],
+    ];
+    clickable.forEach(([id, kind]) => {
       map.on("click", id, (e) => {
         if (e.originalEvent) e.originalEvent._atlasHit = true;
         if (!e.features || !e.features[0]) return;
-        const f = e.features[0];
-        const kind =
-          id.startsWith("rivers") ? "river" :
-          id.startsWith("waters") ? "water" :
-          id.startsWith("dams") ? "dam" :
-          id.startsWith("peaks") ? "peak" :
-          id.startsWith("wilayas") ? "admin" : "place";
-        selectFeature(f, kind);
+        selectFeature(e.features[0], kind);
       });
       map.on("mouseenter", id, () => { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", id, () => { map.getCanvas().style.cursor = ""; });
@@ -398,11 +643,7 @@
 
   function toggleData(key, on) {
     state[key] = on;
-    if (key === "rivers") setVisibility(["rivers-line"], on);
-    if (key === "waters") setVisibility(["waters-fill", "waters-line"], on);
-    if (key === "dams") setVisibility(["dams-circle"], on);
-    if (key === "wilayas") setVisibility(["wilayas-fill", "wilayas-line"], on);
-    if (key === "places") setVisibility(["places-circle", "place-labels", "peaks-circle", "peak-labels"], on);
+    setVisibility(LAYER_IDS[key] || [], on);
   }
 
   function showLayerError(key) {
@@ -492,17 +733,24 @@
 
   function showInspector({ feature, kind }) {
     const p = feature.properties || {};
-    const name = (lang === "ar" && p.name_ar) ? p.name_ar : (p.name || p.name_fr || "—");
-    const fact = lookupFacts([p.name, p.name_ar, p.name_fr].filter(Boolean).join(" "));
+    const name = (lang === "ar" && p.name_ar) ? p.name_ar
+      : (lang === "en" && p.name_en) ? p.name_en
+      : (lang === "fr" && p.name_fr) ? p.name_fr
+      : (p.name || p.name_en || p.name_fr || "—");
+    const fact = lookupFacts([p.name, p.name_ar, p.name_en, p.name_fr].filter(Boolean).join(" "));
     const inspector = document.getElementById("inspector");
-    let kicker = t(kind === "place" ? "admin" : kind);
+    let kicker = t(kind);
     let title = name;
     let chips = [t(kind)];
     let meta = [];
-    let note = p.note || "";
+    let note = (lang === "ar" && p.note_ar) ? p.note_ar : (lang === "en" && p.note_en) ? p.note_en : (p.note_fr || p.note || "");
+    if (p.country) meta.push([t("country"), p.country]);
     if (p.wilaya) meta.push([t("wilaya"), p.wilaya]);
     if (p.type && kind !== "peak") meta.push([t("type"), p.type]);
     if (p.ele) meta.push([t("elevation"), p.ele + " m"]);
+    if (p.pop) meta.push([t("population"), Number(p.pop).toLocaleString(lang === "en" ? "en-GB" : lang === "ar" ? "ar" : "fr-FR")]);
+    if (p.iata) meta.push(["IATA", p.iata]);
+    if (p.lithology) meta.push([t("lithology"), p.lithology]);
     if (fact) {
       kicker = t(fact.kickerKey);
       title = fact.title[lang] || title;
@@ -518,7 +766,7 @@
       `<div class="meta">${meta.map(([a, b]) => `<div><small>${esc(a)}</small><b>${esc(b)}</b></div>`).join("")}</div>` +
       (note ? `<p class="note">${esc(note)}</p>` : "") +
       `<p class="src">${esc(t("src"))}</p>` +
-      `<button class="btn" ${kind === "river" ? "" : "disabled"} id="basin-btn">${esc(t("basinBtn"))}</button>`;
+      `<button class="btn" ${kind === "river" || kind === "major" ? "" : "disabled"} id="basin-btn">${esc(t("basinBtn"))}</button>`;
     inspector.classList.add("show");
     const btn = document.getElementById("basin-btn");
     if (btn) {
@@ -572,7 +820,7 @@
   }
 
   function matchesQuery(item, q) {
-    const hay = fold([item.label, item.name_ar, item.extra].filter(Boolean).join(" "));
+    const hay = fold([item.label, item.name_ar, item.name_en, item.name_fr, item.extra].filter(Boolean).join(" "));
     const qFold = fold(q);
     if (hay.includes(qFold)) return true;
     const qToks = wordTokens(q);
@@ -588,24 +836,46 @@
     const push = (fc, kind) => {
       (fc.features || []).forEach((f) => {
         const p = f.properties || {};
-        const label = p.name || p.name_ar || p.name_fr;
+        const label = p.name || p.name_en || p.name_fr || p.name_ar;
         if (!label) return;
         const key = kind + "::" + canonicalize(label);
         if (seen.has(key)) {
           seen.get(key).features.push(f);
           return;
         }
-        const item = { label, name_ar: p.name_ar, kind, feature: f, features: [f], extra: aliasExtra([label, p.name_ar].filter(Boolean).join(" ")) };
+        const item = {
+          label,
+          name_ar: p.name_ar,
+          name_en: p.name_en,
+          name_fr: p.name_fr,
+          kind,
+          feature: f,
+          features: [f],
+          extra: aliasExtra([label, p.name_ar, p.name_en, p.name_fr].filter(Boolean).join(" ")),
+        };
         seen.set(key, item);
         index.push(item);
       });
     };
-    push(DATA.rivers, "river");
-    push(DATA.waters, "water");
-    push(DATA.dams, "dam");
-    push(DATA.wilayas, "admin");
-    push(DATA.peaks, "peak");
-    push(DATA.places, "place");
+    [
+      ["rivers", "river"],
+      ["rivers_major", "major"],
+      ["waters", "water"],
+      ["lakes", "lakes"],
+      ["dams", "dam"],
+      ["wilayas", "admin"],
+      ["provinces", "provinces"],
+      ["countries", "countries"],
+      ["adm2", "adm2"],
+      ["peaks", "peak"],
+      ["places", "place"],
+      ["regions", "regions"],
+      ["parks", "parks"],
+      ["airports", "airports"],
+      ["ports", "ports"],
+    ].forEach(([key, kind]) => {
+      if (DATA[key]) push(DATA[key], kind);
+    });
   }
 
   const searchInput = document.getElementById("search");
@@ -620,10 +890,11 @@
     const hits = index.filter((it) => matchesQuery(it, q)).slice(0, 12);
     hits.forEach((it) => {
       const fact = lookupFacts([it.label, it.name_ar].filter(Boolean).join(" "));
-      const display = fact ? (fact.title[lang] || it.label) : ((lang === "ar" && it.name_ar) ? it.name_ar : it.label);
+      const localized = lang === "ar" ? it.name_ar : lang === "en" ? it.name_en : it.name_fr;
+      const display = fact ? (fact.title[lang] || it.label) : (localized || it.label);
       const b = document.createElement("button");
       b.type = "button";
-      b.innerHTML = `${esc(display)}<small>${esc(t(it.kind === "place" ? "admin" : it.kind))}</small>`;
+      b.innerHTML = `${esc(display)}<small>${esc(t(it.kind))}</small>`;
       b.onclick = () => {
         results.classList.remove("show");
         searchInput.value = display;
@@ -642,9 +913,14 @@
   });
 
   function fmtCoord(lng, lat) {
-    const ns = lat >= 0 ? "N" : "S";
-    const ew = lng >= 0 ? "E" : "O";
-    const fmt = (n) => Math.abs(n).toFixed(2).replace(".", ",");
+    const ns = lat >= 0 ? (lang === "ar" ? "ش" : "N") : (lang === "ar" ? "ج" : "S");
+    const ew = lng >= 0
+      ? (lang === "ar" ? "ق" : "E")
+      : (lang === "ar" ? "غ" : lang === "en" ? "W" : "O");
+    const fmt = (n) => {
+      const text = Math.abs(n).toFixed(2);
+      return lang === "en" ? text : text.replace(".", ",");
+    };
     return `${fmt(lat)}° ${ns} · ${fmt(lng)}° ${ew}`;
   }
 
@@ -657,13 +933,13 @@
     if (rf >= 1e6) rf = Math.round(rf / 1e5) * 1e5;
     else if (rf >= 1e5) rf = Math.round(rf / 1e4) * 1e4;
     else rf = Math.round(rf / 1e3) * 1e3;
-    const pretty = rf.toLocaleString(lang === "ar" ? "ar" : "fr-FR");
+    const pretty = rf.toLocaleString(lang === "ar" ? "ar" : lang === "en" ? "en-GB" : "fr-FR");
     document.getElementById("scale").textContent = `${t("scale")} 1 : ${pretty}`;
   }
 
-  function frameAlgeria() {
-    map.fitBounds([[-8.7, 18.96], [12.0, 37.1]], {
-      padding: { top: 96, bottom: 64, left: 320, right: 48 },
+  function frameMaghreb() {
+    map.fitBounds([[-17.15, 14.65], [25.2, 37.6]], {
+      padding: { top: 80, bottom: 56, left: 340, right: 36 },
       duration: 0,
     });
   }
@@ -675,7 +951,7 @@
   map.on("click", (e) => {
     if (e.originalEvent && e.originalEvent._atlasHit) return;
     const hits = map.queryRenderedFeatures(e.point, {
-      layers: ["rivers-line", "waters-fill", "dams-circle", "peaks-circle", "wilayas-fill", "places-circle"].filter((id) => map.getLayer(id)),
+      layers: ["rivers-line", "rivers-major-line", "waters-fill", "lakes-fill", "dams-circle", "peaks-circle", "wilayas-fill", "provinces-fill", "adm2-fill", "countries-line", "countries-esh", "places-circle", "regions-fill", "aquifers-fill", "geology-fill", "roads-line", "rail-line", "airports-circle", "ports-circle", "parks-circle"].filter((id) => map.getLayer(id)),
     });
     if (!hits.length) {
       selected = null;
@@ -685,7 +961,7 @@
   });
 
   async function loadAtlasData() {
-    const keys = ["wilayas", "rivers", "waters", "dams", "peaks", "places"];
+    const keys = ["wilayas", "rivers", "waters", "dams", "peaks", "places", "regions", "countries", "provinces", "adm2", "rivers_major", "lakes", "roads", "rail", "airports", "ports", "aquifers", "geology_bgs", "parks"];
     try {
       const health = await fetch("/api/health", { cache: "no-store" });
       if (!health.ok) throw new Error("no api");
@@ -705,7 +981,7 @@
     loadAtlasData().then(() => {
       addDataLayers();
       buildIndex();
-      frameAlgeria();
+      frameMaghreb();
       applyI18n();
       updateScale();
     });

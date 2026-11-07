@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Atlas géographique de l’Algérie</title>
+<title>Atlas géographique du Maghreb</title>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
 <style>
   :root {
@@ -36,7 +36,7 @@
   }
   .sidebar {
     top: 16px; left: 16px;
-    width: 280px;
+    width: 304px;
     max-height: calc(100% - 70px);
     border-radius: 18px;
     padding: 18px 16px 14px;
@@ -233,29 +233,39 @@
   <div class="group">
     <h2 data-i18n="topo">Topographie</h2>
     <div class="layer on" data-layer="mnt"><i class="box"></i><span data-i18n="mnt">Modèle numérique de terrain</span><span class="swatch" style="background:#c4a36a"></span></div>
+    <div class="layer on" data-layer="peaks"><i class="box"></i><span data-i18n="peaks">Sommets</span><span class="swatch" style="background:#b85a2a"></span></div>
+    <div class="layer" data-layer="regions"><i class="box"></i><span data-i18n="regions">Régions physiques</span><span class="swatch" style="background:#8aa07a"></span></div>
     <div class="layer" data-layer="contours"><i class="box"></i><span data-i18n="contours">Courbes de niveau</span><span class="swatch" style="background:#6b5a3a"></span></div>
     <p class="layer-msg" id="msg-contours"></p>
-    <div class="layer" data-layer="slope"><i class="box"></i><span data-i18n="slope">Pente</span><span class="swatch" style="background:#b85a2a"></span></div>
+    <div class="layer" data-layer="slope"><i class="box"></i><span data-i18n="slope">Pente</span><span class="swatch" style="background:#9a6b3a"></span></div>
     <p class="layer-msg" id="msg-slope"></p>
   </div>
   <div class="group">
     <h2 data-i18n="hydro">Hydrographie</h2>
     <div class="layer on" data-layer="rivers"><i class="box"></i><span data-i18n="rivers">Cours d’eau et oueds</span><span class="swatch" style="background:#1f6f86"></span></div>
+    <div class="layer on" data-layer="major"><i class="box"></i><span data-i18n="major">Grands fleuves</span><span class="swatch" style="background:#164e61"></span></div>
     <div class="layer on" data-layer="waters"><i class="box"></i><span data-i18n="waters">Lacs, chotts et sebkhas</span><span class="swatch" style="background:#4aa3b5"></span></div>
+    <div class="layer" data-layer="lakes"><i class="box"></i><span data-i18n="lakes">Grands plans d’eau</span><span class="swatch" style="background:#1f6f86"></span></div>
     <div class="layer" data-layer="dams"><i class="box"></i><span data-i18n="dams">Barrages</span><span class="swatch" style="background:#2b4f8c"></span></div>
-    <div class="layer" data-layer="nappes"><i class="box"></i><span data-i18n="nappes">Nappes phréatiques</span><span class="swatch" style="background:#3d7ea6"></span></div>
-    <p class="layer-msg" id="msg-nappes"></p>
+    <div class="layer" data-layer="nappes"><i class="box"></i><span data-i18n="nappes">Aquifères</span><span class="swatch" style="background:#3d7ea6"></span></div>
     <div class="layer" data-layer="basins"><i class="box"></i><span data-i18n="basins">Bassins versants</span><span class="swatch" style="background:#7eb3c4"></span></div>
     <p class="layer-msg" id="msg-basins"></p>
   </div>
   <div class="group">
     <h2 data-i18n="limits">Limites et références</h2>
-    <div class="layer on" data-layer="wilayas"><i class="box"></i><span data-i18n="wilayas">Wilayas</span><span class="swatch" style="background:#1d4a3a"></span></div>
-    <div class="layer" data-layer="dairas"><i class="box"></i><span data-i18n="dairas">Dairas et communes</span><span class="swatch" style="background:#7a8a7e"></span></div>
-    <p class="layer-msg" id="msg-dairas"></p>
+    <div class="layer on" data-layer="countries"><i class="box"></i><span data-i18n="countries">Pays du Maghreb</span><span class="swatch" style="background:#1a241e"></span></div>
+    <div class="layer on" data-layer="wilayas"><i class="box"></i><span data-i18n="wilayas">Wilayas d’Algérie</span><span class="swatch" style="background:#1d4a3a"></span></div>
+    <div class="layer on" data-layer="provinces"><i class="box"></i><span data-i18n="provinces">Provinces et régions</span><span class="swatch" style="background:#2a6b52"></span></div>
+    <div class="layer" data-layer="adm2"><i class="box"></i><span data-i18n="adm2">Découpage de second niveau</span><span class="swatch" style="background:#7a8a7e"></span></div>
+    <div class="layer" data-layer="bgs"><i class="box"></i><span data-i18n="bgs">Géologie de surface</span><span class="swatch" style="background:#c4a36a"></span></div>
     <div class="layer" data-layer="geology"><i class="box"></i><span data-i18n="geology">Géologie (ASGA / BNDG)</span><span class="swatch" style="background:#9a6b3a"></span></div>
     <p class="layer-msg" id="msg-geology"></p>
     <div class="layer on" data-layer="places"><i class="box"></i><span data-i18n="places">Toponymie</span><span class="swatch" style="background:#3d4a44"></span></div>
+    <div class="layer" data-layer="parks"><i class="box"></i><span data-i18n="parks">Parcs nationaux</span><span class="swatch" style="background:#1d4a3a"></span></div>
+    <div class="layer" data-layer="roads"><i class="box"></i><span data-i18n="roads">Routes principales</span><span class="swatch" style="background:#5c6b62"></span></div>
+    <div class="layer" data-layer="rail"><i class="box"></i><span data-i18n="rail">Chemins de fer</span><span class="swatch" style="background:#6b5a3a"></span></div>
+    <div class="layer" data-layer="airports"><i class="box"></i><span data-i18n="airports">Aéroports</span><span class="swatch" style="background:#3d4a44"></span></div>
+    <div class="layer" data-layer="ports"><i class="box"></i><span data-i18n="ports">Ports</span><span class="swatch" style="background:#1f6f86"></span></div>
   </div>
   <p class="hint" data-i18n="hint">Cliquer un sommet, un oued ou un barrage pour l’inspecter.</p>
 </aside>
@@ -267,6 +277,7 @@
   </div>
   <div class="lang">
     <button type="button" class="on" data-lang="fr">FR</button>
+    <button type="button" data-lang="en">EN</button>
     <button type="button" data-lang="ar">عر</button>
   </div>
 </header>
@@ -276,7 +287,7 @@
 
 <footer class="statusbar">
   <span id="coords">28,00° N · 3,00° E</span>
-  <span data-i18n="statusMid">58 wilayas · 2 381 741 km²</span>
+  <span data-i18n="statusMid">Maghreb · six pays et territoires</span>
   <span id="scale">Échelle 1 : 8 000 000</span>
 </footer>
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Atlas géographique de l'Algérie — API + static file server."""
+"""Atlas géographique du Maghreb — API + static file server."""
 
 from __future__ import annotations
 
@@ -15,21 +15,40 @@ ROOT = Path(__file__).resolve().parent
 PUBLIC = ROOT / "public"
 DATA = PUBLIC / "data"
 
+def _labels(fr: str, ar: str, en: str) -> dict:
+    return {"label_fr": fr, "label_ar": ar, "label_en": en}
+
+
+def _missing(fr: str, ar: str, en: str, reason: str = "missing") -> dict:
+    return {"available": False, "reason": reason, "message_fr": fr, "message_ar": ar, "message_en": en}
+
+
 LAYERS = {
-    "wilayas": {"file": "wilayas.geojson", "kind": "admin", "available": True, "label_fr": "Wilayas", "label_ar": "الولايات"},
-    "rivers": {"file": "rivers.geojson", "kind": "river", "available": True, "label_fr": "Cours d’eau et oueds", "label_ar": "الأودية والمجاري"},
-    "waters": {"file": "waters.geojson", "kind": "water", "available": True, "label_fr": "Lacs, chotts et sebkhas", "label_ar": "البحيرات والشطوط والسبخات"},
-    "dams": {"file": "dams.geojson", "kind": "dam", "available": True, "label_fr": "Barrages", "label_ar": "السدود"},
-    "peaks": {"file": "peaks.geojson", "kind": "peak", "available": True, "label_fr": "Sommets", "label_ar": "القمم"},
-    "places": {"file": "places.geojson", "kind": "place", "available": True, "label_fr": "Toponymie", "label_ar": "الأسماء الجغرافية"},
-    "regions": {"file": "regions.geojson", "kind": "region", "available": True, "label_fr": "Régions physiques", "label_ar": "المناطق الطبيعية"},
-    "inct": {"available": False, "reason": "license", "message_fr": "La carte topographique INCT est commercialisée et n’est pas librement téléchargeable.", "message_ar": "الخريطة الطبوغرافية INCT غير متاحة للتنزيل الحر وتتطلب ترخيصاً."},
-    "contours": {"available": False, "reason": "missing", "message_fr": "Les courbes de niveau ne sont pas encore branchées.", "message_ar": "لم تُربط بعد منحنيات التسوية."},
-    "slope": {"available": False, "reason": "missing", "message_fr": "La couche de pente n’est pas encore branchée.", "message_ar": "لم تُربط بعد طبقة الانحدار."},
-    "nappes": {"available": False, "reason": "missing", "message_fr": "Aucun jeu ouvert de nappes phréatiques n’est encore branché.", "message_ar": "لم تُربط بعد طبقة مفتوحة للمياه الجوفية."},
-    "basins": {"available": False, "reason": "missing", "message_fr": "Les bassins versants ne sont pas encore branchés.", "message_ar": "لم تُربط بعد طبقة الأحواض المائية."},
-    "dairas": {"available": False, "reason": "missing", "message_fr": "Les contours des dairas et communes ne sont pas encore branchés.", "message_ar": "لم تُربط بعد حدود الدوائر والبلديات."},
-    "geology": {"available": False, "reason": "license", "message_fr": "La géologie ASGA / BNDG nécessite une licence.", "message_ar": "بيانات الجيولوجيا ASGA / BNDG تتطلب ترخيصاً."},
+    "countries": {"file": "countries.geojson", "kind": "country", "available": True, **_labels("Pays du Maghreb", "بلدان المغرب الكبير", "Maghreb countries")},
+    "wilayas": {"file": "wilayas.geojson", "kind": "admin", "available": True, **_labels("Wilayas d’Algérie", "ولايات الجزائر", "Algerian wilayas")},
+    "provinces": {"file": "provinces.geojson", "kind": "admin", "available": True, **_labels("Provinces et régions", "الولايات والأقاليم", "Provinces and regions")},
+    "adm2": {"file": "adm2.geojson", "kind": "admin", "available": True, **_labels("Découpage de second niveau", "التقسيم الإداري الثاني", "Second-level divisions")},
+    "regions": {"file": "regions.geojson", "kind": "region", "available": True, **_labels("Régions physiques", "المناطق الطبيعية", "Physical regions")},
+    "rivers": {"file": "rivers.geojson", "kind": "river", "available": True, **_labels("Cours d’eau et oueds", "الأودية والمجاري", "Rivers and wadis")},
+    "rivers_major": {"file": "rivers_major.geojson", "kind": "river", "available": True, **_labels("Grands fleuves", "الأنهار الكبرى", "Major rivers")},
+    "waters": {"file": "waters.geojson", "kind": "water", "available": True, **_labels("Lacs, chotts et sebkhas", "البحيرات والشطوط والسبخات", "Lakes, chotts and sebkhas")},
+    "lakes": {"file": "lakes.geojson", "kind": "water", "available": True, **_labels("Grands plans d’eau", "المسطحات المائية الكبرى", "Large water bodies")},
+    "dams": {"file": "dams.geojson", "kind": "dam", "available": True, **_labels("Barrages", "السدود", "Dams")},
+    "peaks": {"file": "peaks.geojson", "kind": "peak", "available": True, **_labels("Sommets", "القمم", "Summits")},
+    "places": {"file": "places.geojson", "kind": "place", "available": True, **_labels("Toponymie", "الأسماء الجغرافية", "Place names")},
+    "parks": {"file": "parks.geojson", "kind": "park", "available": True, **_labels("Parcs nationaux", "الحدائق الوطنية", "National parks")},
+    "roads": {"file": "roads.geojson", "kind": "road", "available": True, **_labels("Routes principales", "الطرق الرئيسية", "Main roads")},
+    "rail": {"file": "rail.geojson", "kind": "rail", "available": True, **_labels("Chemins de fer", "السكك الحديدية", "Railways")},
+    "airports": {"file": "airports.geojson", "kind": "airport", "available": True, **_labels("Aéroports", "المطارات", "Airports")},
+    "ports": {"file": "ports.geojson", "kind": "port", "available": True, **_labels("Ports", "الموانئ", "Ports")},
+    "aquifers": {"file": "aquifers.geojson", "kind": "aquifer", "available": True, "index": False, **_labels("Aquifères", "الطبقات المائية", "Aquifers")},
+    "geology_bgs": {"file": "geology_bgs.geojson", "kind": "geology", "available": True, "index": False, **_labels("Géologie de surface", "الجيولوجيا السطحية", "Surface geology")},
+    "inct": _missing("La carte topographique INCT est commercialisée et n’est pas librement téléchargeable.", "الخريطة الطبوغرافية INCT غير متاحة للتنزيل الحر وتتطلب ترخيصاً.", "The INCT topographic map is sold commercially and is not freely downloadable.", "license"),
+    "contours": _missing("Les courbes de niveau de tout le Maghreb sont trop volumineuses pour cet atlas.", "منحنيات التسوية لكامل المغرب الكبير أكبر من طاقة هذا الأطلس.", "Contours for the whole Maghreb are too large for this atlas."),
+    "slope": _missing("Aucune tuile ouverte de pente n’est branchée.", "لا توجد طبقة انحدار مفتوحة.", "No open slope tiles are connected."),
+    "basins": _missing("HydroBASINS ne peut pas être republié sous sa licence.", "لا يسمح ترخيص HydroBASINS بإعادة النشر.", "HydroBASINS cannot be republished under its licence."),
+    "dairas": _missing("Les communes d’Algérie ne sont pas dans le jeu ouvert utilisé ici. Le second niveau couvre le Maroc, la Tunisie et la Mauritanie.", "بلديات الجزائر غير موجودة في البيانات المفتوحة المستخدمة هنا.", "Algerian communes are not in the open dataset used here. Second-level divisions cover Morocco, Tunisia and Mauritania."),
+    "geology": _missing("La géologie détaillée ASGA / BNDG nécessite une licence. La couche ouverte est la carte BGS au 1:5 000 000.", "الجيولوجيا التفصيلية ASGA / BNDG تتطلب ترخيصاً.", "Detailed ASGA / BNDG geology needs a licence. The open layer is the BGS 1:5,000,000 map.", "license"),
 }
 
 FACTS = [
@@ -64,13 +83,21 @@ FACTS = [
 ]
 
 KIND_LABEL = {
-    "river": {"fr": "Cours d’eau", "ar": "مجرى مائي"},
-    "water": {"fr": "Plan d’eau", "ar": "مسطح مائي"},
-    "dam": {"fr": "Barrage", "ar": "سد"},
-    "peak": {"fr": "Sommet", "ar": "قمة"},
-    "admin": {"fr": "Limite administrative", "ar": "حدود إدارية"},
-    "place": {"fr": "Lieu", "ar": "مكان"},
-    "region": {"fr": "Région", "ar": "منطقة"},
+    "river": {"fr": "Cours d’eau", "ar": "مجرى مائي", "en": "River"},
+    "water": {"fr": "Plan d’eau", "ar": "مسطح مائي", "en": "Water body"},
+    "dam": {"fr": "Barrage", "ar": "سد", "en": "Dam"},
+    "peak": {"fr": "Sommet", "ar": "قمة", "en": "Summit"},
+    "admin": {"fr": "Limite administrative", "ar": "حدود إدارية", "en": "Administrative area"},
+    "place": {"fr": "Lieu", "ar": "مكان", "en": "Place"},
+    "region": {"fr": "Région", "ar": "منطقة", "en": "Region"},
+    "country": {"fr": "Pays", "ar": "بلد", "en": "Country"},
+    "park": {"fr": "Parc", "ar": "حديقة", "en": "Park"},
+    "road": {"fr": "Route", "ar": "طريق", "en": "Road"},
+    "rail": {"fr": "Chemin de fer", "ar": "سكة حديدية", "en": "Railway"},
+    "airport": {"fr": "Aéroport", "ar": "مطار", "en": "Airport"},
+    "port": {"fr": "Port", "ar": "ميناء", "en": "Port"},
+    "aquifer": {"fr": "Aquifère", "ar": "طبقة مائية", "en": "Aquifer"},
+    "geology": {"fr": "Géologie", "ar": "جيولوجيا", "en": "Geology"},
 }
 
 
@@ -149,7 +176,7 @@ class AtlasStore:
     def index(self) -> list[dict]:
         items = []
         for layer, meta in LAYERS.items():
-            if not meta.get("available"):
+            if not meta.get("available") or meta.get("index") is False:
                 continue
             kind = meta["kind"]
             for feat in self.geojson(layer).get("features") or []:
@@ -190,18 +217,18 @@ class AtlasStore:
         return hits[:limit]
 
     def inspect(self, query: str, lang: str = "fr", kind: str = "") -> dict | None:
-        lang = "ar" if lang == "ar" else "fr"
+        lang = lang if lang in ("fr", "en", "ar") else "fr"
         text = query or ""
         for fact in FACTS:
             if fact["match"].search(text):
                 return {
                     "found": True,
                     "special": True,
-                    "kicker": fact["kicker"][lang],
-                    "title": fact["title"][lang],
-                    "chips": fact["chips"][lang],
-                    "meta": fact["meta"][lang],
-                    "note": fact["note"][lang],
+                    "kicker": fact["kicker"].get(lang) or fact["kicker"]["fr"],
+                    "title": fact["title"].get(lang) or fact["title"]["fr"],
+                    "chips": fact["chips"].get(lang) or fact["chips"]["fr"],
+                    "meta": fact["meta"].get(lang) or fact["meta"]["fr"],
+                    "note": fact["note"].get(lang) or fact["note"]["fr"],
                     "source": source_line(lang),
                 }
         hits = self.search(text, limit=1)
@@ -212,18 +239,21 @@ class AtlasStore:
             return None
         k = item["kind"] or kind or "place"
         meta = []
+        type_label = {"ar": "النوع", "en": "Type", "fr": "Type"}[lang]
+        wilaya_label = {"ar": "الولاية", "en": "Wilaya", "fr": "Wilaya"}[lang]
         if item.get("type"):
-            meta.append(["النوع" if lang == "ar" else "Type", item["type"]])
+            meta.append([type_label, item["type"]])
         if item.get("wilaya"):
-            meta.append(["الولاية" if lang == "ar" else "Wilaya", item["wilaya"]])
+            meta.append([wilaya_label, item["wilaya"]])
         title = item["name_ar"] if lang == "ar" and item["name_ar"] else item["name"]
+        kind_label = (KIND_LABEL.get(k) or KIND_LABEL["place"]).get(lang) or KIND_LABEL["place"]["fr"]
         return {
             "found": True,
             "special": False,
-            "kicker": KIND_LABEL.get(k, KIND_LABEL["place"])[lang],
+            "kicker": kind_label,
             "title": title,
-            "chips": [KIND_LABEL.get(k, KIND_LABEL["place"])[lang]],
-            "meta": meta or [["النوع" if lang == "ar" else "Type", KIND_LABEL.get(k, KIND_LABEL["place"])[lang]]],
+            "chips": [kind_label],
+            "meta": meta or [[type_label, kind_label]],
             "note": "",
             "source": source_line(lang),
             "kind": k,
@@ -233,8 +263,10 @@ class AtlasStore:
 
 def source_line(lang: str) -> str:
     if lang == "ar":
-        return "بيانات مفتوحة للنموذج الأولي (SRTM، مجاري OpenStreetMap، الحدود الإدارية). تبقى INCT وANRH المرجعان الوطنيان."
-    return "Données ouvertes pour le prototype (SRTM / tuiles de terrain, cours d’eau OSM, limites administratives). INCT et ANRH restent les références nationales."
+        return "بيانات مفتوحة (SRTM، OpenStreetMap، Natural Earth، geoBoundaries، أطلس المياه الجوفية لأفريقيا BGS). تبقى INCT وANRH المرجعان الوطنيان للجزائر."
+    if lang == "en":
+        return "Open data (SRTM terrain tiles, OpenStreetMap, Natural Earth, geoBoundaries, BGS Africa Groundwater Atlas). INCT and ANRH remain the Algerian national references."
+    return "Données ouvertes (tuiles SRTM, OpenStreetMap, Natural Earth, geoBoundaries, Africa Groundwater Atlas du BGS). INCT et ANRH restent les références nationales algériennes."
 
 
 STORE = AtlasStore()
@@ -263,7 +295,7 @@ class Handler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         if path == "/api/health":
-            return self._json(200, {"ok": True, "name": "Atlas géographique de l’Algérie"})
+            return self._json(200, {"ok": True, "name": "Atlas géographique du Maghreb"})
         if path == "/api/layers":
             return self._layers(parsed)
         if path.startswith("/api/geojson/"):
@@ -281,11 +313,12 @@ class Handler(SimpleHTTPRequestHandler):
 
     def _layers(self, parsed) -> None:
         qs = parse_qs(parsed.query)
-        lang = "ar" if (qs.get("lang") or ["fr"])[0] == "ar" else "fr"
+        raw = (qs.get("lang") or ["fr"])[0]
+        lang = raw if raw in ("fr", "en", "ar") else "fr"
         items = []
         for key, meta in LAYERS.items():
-            label_key = "label_ar" if lang == "ar" else "label_fr"
-            msg_key = "message_ar" if lang == "ar" else "message_fr"
+            label_key = f"label_{lang}"
+            msg_key = f"message_{lang}"
             items.append({
                 "id": key,
                 "available": bool(meta.get("available")),
@@ -340,7 +373,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Atlas géographique de l’Algérie")
+    parser = argparse.ArgumentParser(description="Atlas géographique du Maghreb")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8765)
     args = parser.parse_args()
